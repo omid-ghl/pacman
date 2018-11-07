@@ -72,6 +72,51 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
+
+def generalSearch(problem,open):
+
+    open.push([(problem.getStartState(),"stop",0)])
+    # open[]   halate shoro va mokhtasat noghte aghazin
+
+    closed = []
+
+    if open.is Empty():
+
+        return false
+    #agar liste open khali shavad be in mani ast ke javabi ndrim
+
+    while open.is not Empty():
+        #agar liste open khali nabashad
+
+        path =open.pop()
+        #masir dar inja malom mishavad
+
+        cs = path[-1][0]
+        #chon ma nmidanim adress e khane akhar chist az akhar shor be nam gozary mikonim
+
+        if problem.isGoalState(cs):
+
+            li = [x[1] for x in path[1:]]
+            return li
+
+        if cs not in closed:
+
+            closed.append(cs)
+            #agar current state ma dar closed ezafe nashawad an ra add mikonim
+
+        for successor in problem.getSuccessors(cs):
+
+            if successor[0] not in closed:
+
+                successorPath = path[:]
+
+                successorPath.append(successor)
+
+                open.push(successorPath)
+                #farzand ra b liste open ezafe mikonim
+
+
+
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
@@ -86,18 +131,31 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    stack = util.Stack()
+    #sakhtar dfs b sourate poshte ast
+
+    return generalSearch(problem, stack)
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    
+    queue = util.Queue()
+    #sakhtar bfs be sorate safhe ast
+
+    return generalSearch(problem, stack)
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+
+    cost = lambda path: problem.getCostOfActions([x[1] for x in path[1:]])
+    #moshakhas kardane hazine az ebteda ta konoun
+
+    priorityqueue =util.PriorityQueueWithFunction(cost)
+    #sakhater ucs b soorate safe olaviat ast
+
+    return generalSearch(problem,priorityqueue)
 
 def nullHeuristic(state, problem=None):
     """
