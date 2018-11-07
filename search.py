@@ -76,23 +76,21 @@ def tinyMazeSearch(problem):
 def generalSearch(problem,open):
 
     open.push([(problem.getStartState(),"stop",0)])
-    # open[]   halate shoro va mokhtasat noghte aghazin
+    # open[] <--[halate aqazin]
 
     closed = []
 
-    if open.is Empty():
-
+    if open.isEmpty():
         return false
-    #agar liste open khali shavad be in mani ast ke javabi ndrim
+    #agar in list khali bashad javab nadarim
 
-    while open.is not Empty():
-        #agar liste open khali nabashad
+    while not open.isEmpty():
 
         path =open.pop()
-        #masir dar inja malom mishavad
+        #masir ra moshakhas mikonad
 
         cs = path[-1][0]
-        #chon ma nmidanim adress e khane akhar chist az akhar shor be nam gozary mikonim
+        #ba tawajoh b sakhare path current state ma barabar ast ba cs
 
         if problem.isGoalState(cs):
 
@@ -118,35 +116,25 @@ def generalSearch(problem,open):
 
 
 def depthFirstSearch(problem):
-    """
-    Search the deepest nodes in the search tree first.
-
-    Your search algorithm needs to return a list of actions that reaches the
-    goal. Make sure to implement a graph search algorithm.
-
-    To get started, you might want to try some of these simple commands to
-    understand the search problem that is being passed in:
-
-    print "Start:", problem.getStartState()
-    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    print "Start's successors:", problem.getSuccessors(problem.getStartState())
-    """
-    stack = util.Stack()
+  
+    Stack = util.Stack()
     #sakhtar dfs b sourate poshte ast
 
     return generalSearch(problem, stack)
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
+
+     Queue = util.Queue()
+
+ return generalSearch(problem, queue)
     
-    queue = util.Queue()
-    #sakhtar bfs be sorate safhe ast
-
-    return generalSearch(problem, stack)
-
 def uniformCostSearch(problem):
-    """Search the node of least total cost first."""
+
+
+
+
+
+return generalSearch(problem, queue)
 
 
     cost = lambda path: problem.getCostOfActions([x[1] for x in path[1:]])
